@@ -1,0 +1,37 @@
+{
+  "uploaded_pdfs": [
+    {
+      "id": "e2135f8bed20",
+      "kind": "uploaded",
+      "original_name": "Mod6.pdf",
+      "display_name": "Mod6.pdf",
+      "stored_name": "e2135f8bed20__Mod6.pdf",
+      "path": "uploaded_pdfs\\e2135f8bed20__Mod6.pdf",
+      "file_hash": "e2135f8bed20cd3d4fa966b161f38b4cc5bba91c98c84197ba2c1a0dfd14dec6",
+      "size": 144854,
+      "uploaded_at": 1775971342
+    },
+    {
+      "id": "22c76ac82c6a",
+      "kind": "uploaded",
+      "original_name": "Chapter1.pdf",
+      "display_name": "Chapter1.pdf",
+      "stored_name": "22c76ac82c6a__Chapter1.pdf",
+      "path": "uploaded_pdfs\\22c76ac82c6a__Chapter1.pdf",
+      "file_hash": "22c76ac82c6afd46329ba94443c99390eaf4aecaccce1fac64e81922d5c2bd81",
+      "size": 708633,
+      "uploaded_at": 1775971342
+    },
+    {
+      "id": "5c322966e7b1",
+      "kind": "uploaded",
+      "original_name": "10. Mobile_Analytics.pdf",
+      "display_name": "10. Mobile_Analytics.pdf",
+      "stored_name": "5c322966e7b1__10._Mobile_Analytics.pdf",
+      "path": "uploaded_pdfs\\5c322966e7b1__10._Mobile_Analytics.pdf",
+      "file_hash": "5c322966e7b1342e7921ebdc1dd1d3447f4ff0ef95f2d7aceaae7d8788bab169",
+      "size": 254415,
+      "uploaded_at": 1775972533
+    }
+  ]
+}

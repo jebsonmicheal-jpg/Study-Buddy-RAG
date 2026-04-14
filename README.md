@@ -1,129 +1,221 @@
-# Question-Answering-System-using-RAG
+# Study Buddy RAG (Local PDF Doubt Solver)
 
-By [<b>Hema Kalyan Murapaka</b>](https://hemakalyan.netlify.app)
+Study Buddy is a complete local RAG app built with Streamlit + Ollama.
+It can parse uploaded PDFs, analyze visual pages, answer doubts from context, generate quizzes, and produce study notes.
 
-Connect with me on social media and explore my work:
+No cloud API key is required.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/hemakalyan)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/KalyanM45)
-[![Medium](https://img.shields.io/badge/Medium-Follow-03a57a?style=flat-square&logo=medium)](https://medium.com/@kalyan45)
-[![Twitter](https://img.shields.io/twitter/follow/KalyanM45?style=social)](https://x.com/mhemakalyan)
-[![Sponsor Hema Kalyan Murapaka](https://img.shields.io/badge/Sponsor-Hema_Kalyan-28a745?style=flat-square&logo=github-sponsors)](https://github.com/sponsors/KalyanM45)
+---
 
-**Special Thanks to GitHub Sponsors**
+## 1) Current capabilities
 
-## About The Project
+- Doubt Solver chat using retrieved PDF context
+- Quiz Mode (MCQ generation + export)
+- Study Notes generation from indexed chunks
+- Visual-page analysis (architecture diagrams / image-heavy pages)
+- Source snippet preview by topic
+- Session chat memory (no external database)
+- Fully local inference (Ollama models)
 
+---
 
-The Document Question Answering System is a sophisticated tool designed to streamline information retrieval from vast document collections. Built on a foundation of advanced natural language processing techniques, the system features a user-friendly interface powered by Streamlit. Leveraging the LangChain framework and Google Generative AI, it ingests documents, converts them into vector embeddings, and employs the Retrieval augmentation generation(RAG) architecture for accurate question answering. Users can input queries through the intuitive interface, with the system retrieving precise answers based on the document context. With its efficiency, accuracy, and scalability, the system finds applications in research, knowledge management, education, and customer support, representing a significant advancement in information access technology.
+## 2) Tech stack
 
-## Library Requirements
+### Runtime
+- Python 3.12 (tested)
+- Streamlit
+- Ollama
 
- - faiss-cpu
- - langchain-groq
- - PyPDF2
- - langchain_google_genai
- - langchain
- - streamlit
- - python-dotenv
+### Retrieval + LLM
+- LangChain Core / Community
+- LangChain Ollama
+- FAISS (in-memory vector store)
+- Recursive text splitter
 
-## Getting Started
+### PDF and utilities
+- PyMuPDF (`fitz`)
+- pypdf
+- python-dotenv
 
-This will help you understand how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Models used
+- `llama3.2:3b` (chat / answers)
+- `nomic-embed-text` (embeddings)
+- `llava:7b` (vision summaries)
 
-## Installation Steps
+---
 
-### Option 1: Installation from GitHub
+## 3) Project structure
 
-Follow these steps to install and set up the project directly from the GitHub repository:
+```text
+Question-Answering-System-using-RAG/
+  app.py
+  requirements.txt
+  README.md
+  LICENSE
+  Artifacts/
+    Articles.pdf
+```
 
-1. **Clone the Repository**
-   - Open your terminal or command prompt.
-   - Navigate to the directory where you want to install the project.
-   - Run the following command to clone the GitHub repository:
-     ```
-     git clone https://github.com/KalyanMurapaka45/Question-Answering-System-using-RAG.git
-     ```
+---
 
-2. **Create a Virtual Environment** (Optional but recommended)
-   - It's a good practice to create a virtual environment to manage project dependencies. Run the following command:
-     ```
-     conda create -p <Environment_Name> python==<python version> -y
-     ```
+## 4) Prerequisites
 
-3. **Activate the Virtual Environment** (Optional)
-   - Activate the virtual environment based on your operating system:
-       ```
-       conda activate <Environment_Name>/
-       ```
+1. Install Ollama: https://ollama.com/
+2. Install Python 3.10+ (3.12 recommended)
+3. Pull models (one-time):
 
-4. **Install Dependencies**
-   - Navigate to the project directory:
-     ```
-     cd [project_directory]
-     ```
-   - Run the following command to install project dependencies:
-     ```
-     pip install -r requirements.txt
-     ```
+```powershell
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+ollama pull llava:7b
+```
 
-5. **Run the Project**
-   - Start the project by running the appropriate command.
-     ```
-     streamlit run app.py
-     ```
+---
 
-6. **Access the Project**
-   - Open a web browser or the appropriate client to access the project.
+## 5) Installation
 
+### Option A: Standard venv setup
 
-## API Key Setup
+```powershell
+git clone https://github.com/KalyanM45/Question-Answering-System-using-RAG.git
+cd Question-Answering-System-using-RAG
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-To use this project, you need an API key from Google Gemini Large Language Model and Groq. Follow these steps to obtain and set up your API key:
+### Option B: Exact interpreter command used in this environment
 
-1. **Get API Key:**
-   - Visit the Provided Links [Groq API](https://console.groq.com/keys) and [Google API](https://aistudio.google.com/app/apikey).
-   - Follow the instructions to create an account and obtain your API key.
+```powershell
+Set-Location "C:\Users\Micheal Jebson M\OneDrive\Desktop\genai\Question-Answering-System-using-RAG"
+& "C:/Users/Micheal Jebson M/AppData/Local/Programs/Python/Python312/python.exe" -m pip install -r requirements.txt
+```
 
-2. **Set Up API Key:**
-   - Create a file named `.env` in the project root.
-   - Add your API key to the `.env` file:
-     ```dotenv
-     API_KEY=your_api_key_here
-     ```
+---
 
-   **Note:** Keep your API key confidential. Do not share it publicly or expose it in your code.<br>
+## 6) Run the app completely (Windows)
 
+### Step 1: Start Ollama service
 
-## Contributing
+```powershell
+ollama serve
+```
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+### Step 2: Run Streamlit
 
-• **Report bugs**: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
+```powershell
+Set-Location "C:\Users\Micheal Jebson M\OneDrive\Desktop\genai\Question-Answering-System-using-RAG"
+& "C:/Users/Micheal Jebson M/AppData/Local/Programs/Python/Python312/python.exe" -m streamlit run app.py --server.port 8504
+```
 
-• **Contribute code**: If you are a developer and want to contribute, follow the instructions below to get started!
+Then open:
+- http://localhost:8504
 
-1. Fork the Project
-2. Create your Feature Branch
-3. Commit your Changes
-4. Push to the Branch
-5. Open a Pull Request
+If port is busy, change to another port (8505/8506, etc.).
 
-• **Suggestions**: If you don't want to code but have some awesome ideas, open up an issue explaining some updates or improvements you would like to see!
+### Optional clean restart command
 
-#### Don't forget to give the project a star! Thanks again!
+```powershell
+Stop-Process -Name "python" -Force 2>$null
+Set-Location "C:\Users\Micheal Jebson M\OneDrive\Desktop\genai\Question-Answering-System-using-RAG"
+& "C:/Users/Micheal Jebson M/AppData/Local/Programs/Python/Python312/python.exe" -m streamlit run app.py --server.port 8504
+```
 
-## License
+---
 
-This project is licensed under the [Open Source Initiative (OSI)](https://opensource.org/) approved GNU General Public License v3.0 License - see the [LICENSE.txt](LICENSE.txt) file for details.<br>
+## 7) How to use
 
+1. Open the app URL from terminal.
+2. In sidebar, verify models:
+   - Chat: `llama3.2:3b`
+   - Embedding: `nomic-embed-text`
+   - Vision: `llava:7b`
+3. Upload PDF (uploaded file is prioritized).
+4. Click **Build KB 🔨**.
+5. Use tabs:
+   - **Doubt Solver**: ask questions from the document
+   - **Quiz Mode**: generate MCQs and export
+   - **Study Notes**: generate topic-wise notes
+   - **How It Works**: app workflow summary
 
-## Contact Details
+---
 
-Hema Kalyan Murapaka - [kalyanmurapaka274@gmail.com](kalyanmurapaka274@gmail.com)<br>
+## 8) Environment configuration (optional)
 
+Create `.env`:
 
-## Acknowledgements
+```dotenv
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_CHAT_MODEL=llama3.2:3b
+OLLAMA_EMBEDDING_MODEL=nomic-embed-text
+OLLAMA_VISION_MODEL=llava:7b
+```
 
-We'd like to extend our gratitude to all individuals and organizations who have played a role in the development and success of this project. Your support, whether through contributions, inspiration, or encouragement, has been invaluable. Thank you for being a part of our journey.
+Defaults are already set in `app.py`, so `.env` is optional.
+
+---
+
+## 9) Features currently in app UI
+
+- Dark theme (black background / white text)
+- Knowledge base status cards (pages, chunks, memory)
+- Chat memory per session
+- Study-note generation with topic input and point count
+- Snippet preview with page metadata
+- MCQ generation with answer/explanation reveal
+
+---
+
+## 10) Troubleshooting
+
+### `ERR_CONNECTION_REFUSED` / `/_stcore/health`
+- Streamlit is not running.
+- Restart app from terminal and open the latest URL.
+
+### Port not available
+- Change port:
+
+```powershell
+& "C:/Users/Micheal Jebson M/AppData/Local/Programs/Python/Python312/python.exe" -m streamlit run app.py --server.port 8505
+```
+
+### `No module named ...`
+- Install dependencies with the same interpreter used to run Streamlit.
+
+### Slow KB build
+- Disable vision for faster indexing.
+- Large PDFs with image summaries will take longer.
+
+### Answers feel irrelevant
+- Rebuild KB after changing/uploading PDF.
+- Ask specific topic/page-based questions.
+- Keep model names exactly matching pulled Ollama models.
+
+---
+
+## 11) Notes on architecture
+
+- PDF text + visual summaries are converted into `Document` chunks.
+- Embeddings are generated locally and stored in FAISS in-memory.
+- Retrieval uses context-first answering in chat.
+- Study notes and MCQs are generated from retrieved context.
+
+---
+
+## 12) Privacy
+
+- Fully local inference and processing
+- No external LLM API calls
+- Documents stay on local machine
+
+---
+
+## 13) License
+
+See [LICENSE](LICENSE).
+
+---
+
+## 14) Credits
+
+Original repository adapted and modernized into a local Ollama-first RAG system with improved UI, study notes, and quiz workflow.

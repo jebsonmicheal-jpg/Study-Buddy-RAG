@@ -1,0 +1,13 @@
+{
+  "signature": "21dcb34e5a673a0f0d2c215022be4a36598bd8a9e0260900db0be4e0a9d3deb4",
+  "built_at": 1775973023,
+  "total_pages": 67,
+  "total_chunks": 90,
+  "build_time_seconds": 12.58,
+  "source_chunk_counts": {
+    "e2135f8bed20": 29,
+    "22c76ac82c6a": 30,
+    "5c322966e7b1": 17,
+    "default_articles": 14
+  }
+}
